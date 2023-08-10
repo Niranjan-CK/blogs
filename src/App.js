@@ -1,15 +1,15 @@
-import './App.css';
-import { Header , Footer } from './components';
-import { AllRoutes } from './routes/AllRoutes';
-function App() {
+import React from 'react'
+import './App.css'
+import { Header, Footer } from './components'
+import { AllRoutes } from './routes/AllRoutes'
+
+function App () {
   return (
     <>
-        <Header />
-        <AllRoutes/>
-        <Footer/>
-
+      <Header />
+      <AllRoutes />
+      <Footer />
     </>
-  );
+  )
 }
-
-export default App;
+export default App

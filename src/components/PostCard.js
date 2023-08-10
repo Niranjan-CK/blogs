@@ -1,25 +1,21 @@
-import { db } from "../firebase/firebase"
-import { deleteDoc, doc } from "firebase/firestore"
+import React from 'react'
+import { db } from '../firebase/firebase'
+import { deleteDoc, doc } from 'firebase/firestore'
+import PropTypes from 'prop-types'
+export const PostCard = ({ post }) => {
+  const { id, title, description, author } = post
+  const deleteButton = JSON.parse(localStorage.getItem('isAuth')) || false
+  async function handleDelete () {
+    // console.log("delete")
+    await deleteDoc(doc(db, 'blogs', id)).then((
+      alert('Deleted successfully')
+    ))
+  }
 
-export const PostCard=({post})=>{
-    const {id , title , description , author} = post
-    const deleteButton  = JSON.parse(localStorage.getItem("isAuth"))||false
-   
-    async function handleDelete(){
-        // console.log("delete")
-        await deleteDoc(doc(db, "blogs", id)).then((
-            alert("Deleted successfully")
-        ))
-    }
-    
-    
-    return(
+  return (
         <>
-            
             <div className="card">
-                
                     <h5 className="title">{title}</h5>
-               
                 <p className="description">{description}</p>
                 <div className="flex">
                     <button type="button" className=" control py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -40,5 +36,16 @@ export const PostCard=({post})=>{
             </div>
 
         </>
-    )
+  )
+}
+
+PostCard.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    author: PropTypes.shape({
+      username: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 }

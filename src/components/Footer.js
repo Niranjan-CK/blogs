@@ -1,7 +1,9 @@
-export const Footer=()=>{
-    return(
+import React from 'react'
+
+export const Footer = () => {
+  return (
         <footer>
             heading
         </footer>
-    )
+  )
 }
